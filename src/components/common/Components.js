@@ -26,3 +26,23 @@ export const Input = styled.input`
   color: black;
   outline: none;
 `;
+
+export const LoginContainer = styled.div`
+  background-color: #9056bf;
+  height: 100vh;
+  padding-top: 170px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  color: white;
+  h1 {
+    font-size: 32px;
+    font-family: "Saira Stencil One", cursive;
+    margin-bottom: 24px;
+  }
+  a {
+    font-size: 15px;
+    font-family: "Raleway", sans-serif;
+    font-weight: 700;
+  }
+`;
