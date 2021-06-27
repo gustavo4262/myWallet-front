@@ -1,7 +1,7 @@
 import { useHistory } from "react-router";
 import { EntryContainer, Input, InputButton } from "../common/Components";
 
-export default function Gain() {
+export default function AddRevenue() {
   const history = useHistory();
   function submit(e) {
     e.preventDefault();

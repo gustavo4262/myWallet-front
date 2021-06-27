@@ -5,13 +5,13 @@ import { Link } from "react-router-dom";
 export default function AddButtons() {
   return (
     <Container>
-      <Link to="/new-gain">
+      <Link to="/new-revenue">
         <Button>
           <AddCircleOutline cssClasses="icon" />
           <TitleButton>Nova Entrada</TitleButton>
         </Button>
       </Link>
-      <Link to="/new-lost">
+      <Link to="/new-expense">
         <Button>
           <RemoveCircleOutline cssClasses="icon" />
           <TitleButton>Nova Saída</TitleButton>

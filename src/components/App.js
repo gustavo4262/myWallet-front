@@ -1,30 +1,36 @@
-import { BrowserRouter, Switch, Route } from "react-router-dom";
-import Gain from "./add-entry/Gain";
-import Lost from "./add-entry/Lost";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import AddRevenue from "./add-entry/AddRevenue";
+import AddExpense from "./add-entry/AddExpense";
 import HomePage from "./home-page/HomePage";
 import SignIn from "./login/SignIn";
 import SignUp from "./login/SignUp";
+import UserContext from "../contexts/UserContext";
+import { useState } from "react";
 
 export default function () {
+  const [user, setUser] = useState(localStorage.getItem("user"));
+
   return (
     <BrowserRouter>
-      <Switch>
-        <Route path="/sign-in" exact>
-          <SignIn></SignIn>
-        </Route>
-        <Route path="/sign-up">
-          <SignUp></SignUp>
-        </Route>
-        <Route path="/" exact>
-          <HomePage></HomePage>
-        </Route>
-        <Route path="/new-gain" exact>
-          <Gain></Gain>
-        </Route>
-        <Route path="/new-lost" exact>
-          <Lost></Lost>
-        </Route>
-      </Switch>
+      <UserContext.Provider value={(user, setUser)}>
+        <Switch>
+          <Route path="/" exact>
+            {user ? <HomePage></HomePage> : <Redirect to="sign-in"></Redirect>}
+          </Route>
+          <Route path="/sign-in" exact>
+            <SignIn></SignIn>
+          </Route>
+          <Route path="/sign-up">
+            <SignUp></SignUp>
+          </Route>
+          <Route path="/new-revenue" exact>
+            <AddRevenue></AddRevenue>
+          </Route>
+          <Route path="/new-expense" exact>
+            <AddExpense></AddExpense>
+          </Route>
+        </Switch>
+      </UserContext.Provider>
     </BrowserRouter>
   );
 }
