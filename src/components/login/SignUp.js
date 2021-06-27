@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { LoginContainer, Input, Button } from "../common/Components";
+import { LoginContainer, Input, InputButton } from "../common/Components";
 
 export default function SignUp() {
   const [userName, setUserName] = useState("");
@@ -41,7 +41,7 @@ export default function SignUp() {
           value={confirmationPassword}
           onChange={(e) => setConfirmationPassword(e.target.value)}
         ></Input>
-        <Button>Entrar</Button>
+        <InputButton>Entrar</InputButton>
         <Link to="/">
           <h2>Já tem uma conta? Entre agora!</h2>
         </Link>

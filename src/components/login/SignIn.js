@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { LoginContainer, Button, Input } from "../common/Components";
+import { LoginContainer, InputButton, Input } from "../common/Components";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -26,7 +26,7 @@ export default function SignIn() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         ></Input>
-        <Button>Entrar</Button>
+        <InputButton>Entrar</InputButton>
         <Link to="/sign-up">
           <h2>Primeira vez? Cadastre-se!</h2>
         </Link>

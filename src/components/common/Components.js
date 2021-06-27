@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Button = styled.button`
+export const InputButton = styled.button`
   background-color: #a328d6;
   color: white;
   width: 86vw;
