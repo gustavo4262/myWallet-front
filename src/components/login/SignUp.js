@@ -1,16 +1,40 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { useState, useContext } from "react";
+import { Link, useHistory } from "react-router-dom";
+import UserContext from "../../contexts/UserContext";
 import { LoginContainer, Input, InputButton } from "../common/Components";
 
 export default function SignUp() {
-  const [userName, setUserName] = useState("");
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmationPassword, setConfirmationPassword] = useState("");
+  const { user, setUser } = useContext(UserContext);
+  const history = useHistory();
 
   function submit(e) {
     e.preventDefault();
-    console.log(email, password, userName, confirmationPassword);
+    if (password !== confirmationPassword) {
+      return alert("Senha e Confirmação de Senha não coincidem");
+    }
+    const data = { username, email, password };
+    const request = axios.post("http://127.0.0.1:4000/sign-up", data);
+    request.then((response) => {
+      alert("Cadastro feito com sucesso!");
+      history.push("/sign-in");
+    });
+    request.catch((err) => {
+      if (err.status === 409) alert("Usuário já cadastrado");
+      if (err.status === 400) alert("Erro no cadastro");
+      clear();
+    });
+  }
+
+  function clear() {
+    setUsername("");
+    setEmail("");
+    setPassword("");
+    setConfirmationPassword("");
   }
 
   return (
@@ -20,8 +44,8 @@ export default function SignUp() {
         <Input
           placeholder="Nome"
           type="text"
-          value={userName}
-          onChange={(e) => setUserName(e.target.value)}
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
         ></Input>
         <Input
           placeholder="E-mail"
