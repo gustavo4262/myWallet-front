@@ -18,6 +18,7 @@ export const Input = styled.input`
   height: 58px;
   background-color: #ffffff;
   border-radius: 5px;
+  border: none;
   margin-bottom: 13px;
   padding-left: 15px;
   font-size: 20px;
@@ -31,10 +32,12 @@ export const LoginContainer = styled.div`
   background-color: #9056bf;
   height: 100vh;
   padding-top: 170px;
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
   color: white;
+  form {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+  }
   h1 {
     font-size: 32px;
     font-family: "Saira Stencil One", cursive;
