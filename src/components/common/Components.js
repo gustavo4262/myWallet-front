@@ -49,3 +49,16 @@ export const LoginContainer = styled.div`
     font-weight: 700;
   }
 `;
+
+export const EntryContainer = styled.div`
+  padding: 30px 23px;
+  background-color: #9056bf;
+  height: 100vh;
+  h1 {
+    font-size: 26px;
+    color: white;
+    font-family: "Raleway", sans-serif;
+    font-weight: 700;
+    margin-bottom: 40px;
+  }
+`;
