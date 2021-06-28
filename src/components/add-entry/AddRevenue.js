@@ -18,7 +18,7 @@ export default function AddRevenue() {
     const data = { value, description };
 
     const request = axios.post(
-      "http://127.0.0.1:4000/add-expense",
+      "http://127.0.0.1:4000/add-revenue",
       data,
       config
     );

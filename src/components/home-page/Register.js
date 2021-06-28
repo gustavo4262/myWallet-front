@@ -7,7 +7,7 @@ export default function Register(props) {
       <RegisterInfo type="date">{register.date}</RegisterInfo>
       <RegisterInfo type="name">{register.name}</RegisterInfo>
       <RegisterInfo type={register.price > 0 ? "revenue" : "expense"}>
-        {register.price.toFixed(2)}
+        {Math.abs(register.price).toFixed(2)}
       </RegisterInfo>
     </Container>
   );
