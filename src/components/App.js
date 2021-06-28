@@ -12,7 +12,7 @@ export default function () {
 
   return (
     <BrowserRouter>
-      <UserContext.Provider value={(user, setUser)}>
+      <UserContext.Provider value={{ user, setUser }}>
         <Switch>
           <Route path="/" exact>
             {user ? <HomePage></HomePage> : <Redirect to="sign-in"></Redirect>}

@@ -1,14 +1,27 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { useContext, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import UserContext from "../../contexts/UserContext";
 import { LoginContainer, InputButton, Input } from "../common/Components";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { user, setUser } = useContext(UserContext);
+  const history = useHistory();
 
   function submit(e) {
     e.preventDefault();
-    console.log(email, password);
+
+    const data = { email, password };
+
+    const request = axios.post("http://127.0.0.1:4000/sign-in", data);
+
+    request.then((response) => {
+      setUser(response.data);
+      localStorage.setItem("user", response.data);
+      history.push("/");
+    });
   }
   return (
     <LoginContainer>
