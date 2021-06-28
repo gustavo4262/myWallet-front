@@ -2,18 +2,18 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import UserContext from "../../contexts/UserContext";
+import Register from "./Register";
 
 export default function AllRegisters() {
   const [registers, setRegisters] = useState([]);
   const [balancePrice, setBalancePrice] = useState(0);
-  const { user, setUser } = useContext(UserContext);
+  const user = JSON.parse(localStorage.getItem("user"));
   useEffect(() => {
     const config = {
       headers: {
         Authorization: user.token,
       },
     };
-    console.log(user);
     const request = axios.get("http://127.0.0.1:4000/registers", config);
     request.then((response) => {
       setRegisters(response.data.registers);
@@ -25,13 +25,7 @@ export default function AllRegisters() {
       {registers.length ? (
         <>
           {registers.map((register) => (
-            <Register key={register.id}>
-              <RegisterInfo type="date">{register.date}</RegisterInfo>
-              <RegisterInfo type="name">{register.name}</RegisterInfo>
-              <RegisterInfo type={register.type}>
-                {register.price.toFixed(2)}
-              </RegisterInfo>
-            </Register>
+            <Register key={register.id} register={register}></Register>
           ))}
           <BalanceInfo positive={balancePrice > 0}>
             <strong>Saldo</strong>
@@ -56,26 +50,6 @@ const Container = styled.div`
   margin-bottom: 15px;
   padding: 23px 17px;
   overflow-y: scroll;
-`;
-
-const Register = styled.div`
-  height: 40px;
-  position: relative;
-`;
-
-const RegisterInfo = styled.span`
-  font-size: 20;
-  font-family: "Raleway", sans-serif;
-  font-weight: 400;
-  margin-left: 4px;
-  margin-right: ${(props) => props.type === "name" && "100px"};
-  color: ${(props) => props.type === "date" && "#C6C6C6"};
-  color: ${(props) => props.type === "name" && "#black"};
-  color: ${(props) => props.type === "revenue" && "#03AC00"};
-  color: ${(props) => props.type === "expense" && "#C70000"};
-  position: ${(props) =>
-    (props.type === "revenue" || props.type === "expense") && "absolute"};
-  right: 10px;
 `;
 
 const BalanceInfo = styled.div`

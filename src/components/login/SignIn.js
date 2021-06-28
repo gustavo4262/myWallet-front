@@ -19,7 +19,7 @@ export default function SignIn() {
 
     request.then((response) => {
       setUser(response.data);
-      localStorage.setItem("user", response.data);
+      localStorage.setItem("user", JSON.stringify(response.data));
       history.push("/");
     });
   }

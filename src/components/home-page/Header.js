@@ -1,13 +1,15 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { LogOutOutline } from "react-ionicons";
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import UserContext from "../../contexts/UserContext";
 
 export default function Header() {
-  const { user, setUser } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
+  const user = JSON.parse(localStorage.getItem("user"));
   const history = useHistory();
 
+  useEffect(() => console.log(user), []);
   function logOut() {
     setUser({});
     localStorage.removeItem("user");
