@@ -19,6 +19,7 @@ export default function SignUp() {
     const data = { username, email, password };
     const request = axios.post("http://127.0.0.1:4000/sign-up", data);
     request.then((response) => {
+      console.log(data);
       alert("Cadastro feito com sucesso!");
       history.push("/sign-in");
     });

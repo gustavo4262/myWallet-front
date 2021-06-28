@@ -53,9 +53,11 @@ const Container = styled.div`
 `;
 
 const BalanceInfo = styled.div`
+  align-self: flex-end;
   font-size: 20;
   font-family: "Raleway", sans-serif;
   font-weight: 400;
+  background-color: black;
   strong {
     position: absolute;
     bottom: 15px;

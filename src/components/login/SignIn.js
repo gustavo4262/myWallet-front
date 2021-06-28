@@ -17,10 +17,15 @@ export default function SignIn() {
 
     const request = axios.post("http://127.0.0.1:4000/sign-in", data);
 
+    console.log(data);
+
     request.then((response) => {
       setUser(response.data);
       localStorage.setItem("user", JSON.stringify(response.data));
       history.push("/");
+    });
+    request.catch((err) => {
+      alert("Usuario e/ou senha incorretos");
     });
   }
   return (

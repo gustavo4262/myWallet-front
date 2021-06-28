@@ -6,7 +6,7 @@ export default function Register(props) {
     <Container key={register.id}>
       <RegisterInfo type="date">{register.date}</RegisterInfo>
       <RegisterInfo type="name">{register.name}</RegisterInfo>
-      <RegisterInfo type={register.type}>
+      <RegisterInfo type={register.price > 0 ? "revenue" : "expense"}>
         {register.price.toFixed(2)}
       </RegisterInfo>
     </Container>
@@ -23,6 +23,10 @@ const RegisterInfo = styled.span`
   font-family: "Raleway", sans-serif;
   font-weight: 400;
   margin-left: 4px;
+  max-width: 130px;
+  display: inline-block;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
   margin-right: ${(props) => props.type === "name" && "100px"};
   color: ${(props) => props.type === "date" && "#C6C6C6"};
   color: ${(props) => props.type === "name" && "#black"};
