@@ -9,7 +9,6 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmationPassword, setConfirmationPassword] = useState("");
-  const { user, setUser } = useContext(UserContext);
   const history = useHistory();
 
   function submit(e) {

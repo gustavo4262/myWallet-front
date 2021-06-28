@@ -1,12 +1,22 @@
+import { useContext } from "react";
 import { LogOutOutline } from "react-ionicons";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
+import UserContext from "../../contexts/UserContext";
 
 export default function Header() {
+  const { user, setUser } = useContext(UserContext);
+  const history = useHistory();
+
+  function logOut() {
+    setUser({});
+    localStorage.removeItem("user");
+    history.push("/sign-in");
+  }
   return (
     <Container>
-      <h1>Olá, Fulano</h1>
-      <Link to="sign-in">
+      <h1>Olá, {user.username}</h1>
+      <Link to="sign-in" onClick={logOut}>
         <LogOutOutline cssClasses="icon"></LogOutOutline>
       </Link>
     </Container>
