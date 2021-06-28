@@ -1,9 +1,25 @@
-import { useEffect, useState } from "react";
+import axios from "axios";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
+import UserContext from "../../contexts/UserContext";
 
 export default function AllRegisters() {
   const [registers, setRegisters] = useState([]);
-  const [balancePrice, setBalancePrice] = useState(6.21);
+  const [balancePrice, setBalancePrice] = useState(0);
+  const { user, setUser } = useContext(UserContext);
+  useEffect(() => {
+    const config = {
+      headers: {
+        Authorization: user.token,
+      },
+    };
+    console.log(user);
+    const request = axios.get("http://127.0.0.1:4000/registers", config);
+    request.then((response) => {
+      setRegisters(response.data.registers);
+      setBalancePrice(response.data.balancePrice.price);
+    });
+  }, []);
   return (
     <Container>
       {registers.length ? (
@@ -12,12 +28,14 @@ export default function AllRegisters() {
             <Register key={register.id}>
               <RegisterInfo type="date">{register.date}</RegisterInfo>
               <RegisterInfo type="name">{register.name}</RegisterInfo>
-              <RegisterInfo type={register.type}>{register.preco}</RegisterInfo>
+              <RegisterInfo type={register.type}>
+                {register.price.toFixed(2)}
+              </RegisterInfo>
             </Register>
           ))}
           <BalanceInfo positive={balancePrice > 0}>
             <strong>Saldo</strong>
-            <span>{balancePrice}</span>
+            <span>{balancePrice.toFixed(2)}</span>
           </BalanceInfo>
         </>
       ) : (
@@ -42,6 +60,7 @@ const Container = styled.div`
 
 const Register = styled.div`
   height: 40px;
+  position: relative;
 `;
 
 const RegisterInfo = styled.span`
@@ -52,8 +71,11 @@ const RegisterInfo = styled.span`
   margin-right: ${(props) => props.type === "name" && "100px"};
   color: ${(props) => props.type === "date" && "#C6C6C6"};
   color: ${(props) => props.type === "name" && "#black"};
-  color: ${(props) => props.type === "in" && "#03AC00"};
-  color: ${(props) => props.type === "out" && "#C70000"};
+  color: ${(props) => props.type === "revenue" && "#03AC00"};
+  color: ${(props) => props.type === "expense" && "#C70000"};
+  position: ${(props) =>
+    (props.type === "revenue" || props.type === "expense") && "absolute"};
+  right: 10px;
 `;
 
 const BalanceInfo = styled.div`
